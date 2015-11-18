@@ -27,7 +27,7 @@ import org.bson.codecs.EncoderContext;
 import org.bson.io.BasicOutputBuffer;
 import org.junit.Test;
 
-public class MonthIntegerCodecTest {
+public class MonthInt32CodecTest {
 
 	@SuppressWarnings("resource")
 	@Test

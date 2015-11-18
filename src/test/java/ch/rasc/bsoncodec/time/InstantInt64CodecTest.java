@@ -18,7 +18,7 @@ package ch.rasc.bsoncodec.time;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.nio.ByteBuffer;
-import java.time.Year;
+import java.time.Instant;
 
 import org.bson.BsonBinaryReader;
 import org.bson.BsonBinaryWriter;
@@ -27,19 +27,19 @@ import org.bson.codecs.EncoderContext;
 import org.bson.io.BasicOutputBuffer;
 import org.junit.Test;
 
-public class YearIntegerCodecTest {
+public class InstantInt64CodecTest {
 
 	@SuppressWarnings("resource")
 	@Test
 	public void testCodec() {
-		Year now = Year.now();
+		Instant now = Instant.now();
 
-		YearInt32Codec codec = new YearInt32Codec();
+		InstantInt64Codec codec = new InstantInt64Codec();
 
 		BasicOutputBuffer bsonOutput = new BasicOutputBuffer();
 		BsonBinaryWriter writer = new BsonBinaryWriter(bsonOutput);
 		writer.writeStartDocument();
-		writer.writeName("Year");
+		writer.writeName("instant");
 		codec.encode(writer, now, EncoderContext.builder().build());
 		writer.writeEndDocument();
 		writer.close();
@@ -47,8 +47,8 @@ public class YearIntegerCodecTest {
 		BsonBinaryReader reader = new BsonBinaryReader(
 				ByteBuffer.wrap(bsonOutput.toByteArray()));
 		reader.readStartDocument();
-		assertThat(reader.readName()).isEqualTo("Year");
-		Year readNow = codec.decode(reader, DecoderContext.builder().build());
+		assertThat(reader.readName()).isEqualTo("instant");
+		Instant readNow = codec.decode(reader, DecoderContext.builder().build());
 
 		assertThat(now).isEqualTo(readNow);
 	}
