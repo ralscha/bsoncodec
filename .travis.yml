@@ -1,0 +1,24 @@
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+
+language: java
+
+jdk:
+- oraclejdk8
+
+env:
+  global:
+  - SONATYPE_USERNAME=ralscha23
+  - secure: NxXENcIdzUaMoOdE7at1mNXW8msbB3DvltHlmP0ou7C4kGVW4CdRvTXJ5vw5zpmisHCZQhzVlcr7Xo/L89GlZ5RL3E223hy0ctw2Qbz1eYWLZ2SA4t/0UmkE4McPY7TbbtQTiHI4308pVNvKtGFRc972JfdP2JcTZXGQUg2lKdpiOn9VmPp+CYl+HOAKl9zSJTdEJltvVKUkcpFBXefIB/djqcqhDlnr5khJWAdIn+4erEj21u1m0WWpK3u19Pgrwyg+g6W8wpxRopfNeMs2xjzqRFTp4qlsfLgjkHRu8Dho21OlTYpeOlIuJ8PwblhHRXPn1+GZseWhJygKUUM8yYejar6NO3q8KDjmSGepXZCudLS2gj3wyWllnvDEK3EN1GK0gVoTlNTfiWrgaN+KZ2kx/Qok5zZsv7NOBeL1jrqIB5KX3z87NSRPCpPKQzZ18nxawVpnRy27phTIZ7gpqPyAtJRMR56TKvP6dsM3iMIHAoP5fS112FpTbm11yTJwkVDqCs5doYNXGqjfJTiVTnmZ43aaqzpDqOkZv6OWxciqaFjDe0A6HQJtmE5o+LZxwwn0BtDiL/fDfkNNQRh7gwm4OPTn2o8/yTvLNIuvMuY5Kj3ns2bV9Jyocve1d4TVYDNp11h9QU6JU7yFAG3YIhfp24DDyWBeOMnZIghJxKE=
+
+after_success:
+- python addsettings.py
+- mvn clean deploy -DskipTests=true --settings ~/.m2/mySettings.xml
+
+cache:
+  directories:
+  - "$HOME/.m2"
