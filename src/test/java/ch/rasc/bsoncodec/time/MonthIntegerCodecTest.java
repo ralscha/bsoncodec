@@ -34,7 +34,7 @@ public class MonthIntegerCodecTest {
 	public void testCodec() {
 		Month now = Month.NOVEMBER;
 
-		MonthIntegerCodec codec = new MonthIntegerCodec();
+		MonthInt32Codec codec = new MonthInt32Codec();
 
 		BasicOutputBuffer bsonOutput = new BasicOutputBuffer();
 		BsonBinaryWriter writer = new BsonBinaryWriter(bsonOutput);

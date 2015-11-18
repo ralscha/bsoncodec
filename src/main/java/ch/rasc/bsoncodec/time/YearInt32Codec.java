@@ -23,7 +23,7 @@ import org.bson.codecs.Codec;
 import org.bson.codecs.DecoderContext;
 import org.bson.codecs.EncoderContext;
 
-public class YearIntegerCodec implements Codec<Year> {
+public class YearInt32Codec implements Codec<Year> {
 
 	@Override
 	public Class<Year> getEncoderClass() {

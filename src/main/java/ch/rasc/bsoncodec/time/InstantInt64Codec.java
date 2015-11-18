@@ -23,7 +23,7 @@ import org.bson.codecs.Codec;
 import org.bson.codecs.DecoderContext;
 import org.bson.codecs.EncoderContext;
 
-public class InstantLongCodec implements Codec<Instant> {
+public class InstantInt64Codec implements Codec<Instant> {
 
 	@Override
 	public Class<Instant> getEncoderClass() {

@@ -34,7 +34,7 @@ public class InstantLongCodecTest {
 	public void testCodec() {
 		Instant now = Instant.now();
 
-		InstantLongCodec codec = new InstantLongCodec();
+		InstantInt64Codec codec = new InstantInt64Codec();
 
 		BasicOutputBuffer bsonOutput = new BasicOutputBuffer();
 		BsonBinaryWriter writer = new BsonBinaryWriter(bsonOutput);

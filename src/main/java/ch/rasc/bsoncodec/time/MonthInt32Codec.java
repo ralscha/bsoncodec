@@ -23,7 +23,7 @@ import org.bson.codecs.Codec;
 import org.bson.codecs.DecoderContext;
 import org.bson.codecs.EncoderContext;
 
-public class MonthIntegerCodec implements Codec<Month> {
+public class MonthInt32Codec implements Codec<Month> {
 
 	@Override
 	public Class<Month> getEncoderClass() {

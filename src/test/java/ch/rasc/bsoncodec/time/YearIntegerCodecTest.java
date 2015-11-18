@@ -34,7 +34,7 @@ public class YearIntegerCodecTest {
 	public void testCodec() {
 		Year now = Year.now();
 
-		YearIntegerCodec codec = new YearIntegerCodec();
+		YearInt32Codec codec = new YearInt32Codec();
 
 		BasicOutputBuffer bsonOutput = new BasicOutputBuffer();
 		BsonBinaryWriter writer = new BsonBinaryWriter(bsonOutput);
