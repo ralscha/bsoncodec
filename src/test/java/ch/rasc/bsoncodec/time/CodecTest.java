@@ -19,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.nio.ByteBuffer;
 import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.Month;
 import java.time.MonthDay;
@@ -43,6 +44,11 @@ public class CodecTest {
 	public void testDayOfWeekStringCodec() {
 		writeReadCompare(DayOfWeek.MONDAY, new DayOfWeekStringCodec());
 	}
+	
+	@Test
+	public void testDurationStringCodec() {
+		writeReadCompare(Duration.ofMinutes(44), new DurationStringCodec());
+	}	
 
 	@Test
 	public void testInstantInt64Codec() {
