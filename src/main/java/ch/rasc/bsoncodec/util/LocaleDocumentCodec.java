@@ -53,10 +53,12 @@ public class LocaleDocumentCodec implements Codec<Locale> {
 		writer.writeString(this.languageKey, value.getLanguage());
 		if (!value.getCountry().isEmpty()) {
 			writer.writeString(this.countryKey, value.getCountry());
+
+			if (!value.getVariant().isEmpty()) {
+				writer.writeString(this.variantKey, value.getVariant());
+			}
 		}
-		if (!value.getVariant().isEmpty()) {
-			writer.writeString(this.variantKey, value.getVariant());
-		}
+
 		writer.writeEndDocument();
 	}
 

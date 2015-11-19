@@ -38,11 +38,6 @@ public class CodecTest extends AbstractTest {
 	}
 
 	@Test
-	public void testDayOfWeekStringCodec() {
-		writeReadCompare(DayOfWeek.MONDAY, new DayOfWeekStringCodec());
-	}
-
-	@Test
 	public void testDurationInt64Codec() {
 		writeReadCompare(Duration.ofMinutes(44), new DurationInt64Codec());
 	}
@@ -99,11 +94,6 @@ public class CodecTest extends AbstractTest {
 	@Test
 	public void testMonthInt32Codec() {
 		writeReadCompare(Month.APRIL, new MonthInt32Codec());
-	}
-
-	@Test
-	public void testMonthStringCodec() {
-		writeReadCompare(Month.NOVEMBER, new MonthStringCodec());
 	}
 
 	@Test
