@@ -23,8 +23,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.time.MonthDay;
+import java.time.OffsetDateTime;
+import java.time.OffsetTime;
 import java.time.Period;
 import java.time.Year;
+import java.time.ZonedDateTime;
 
 import org.junit.Test;
 
@@ -97,6 +100,16 @@ public class CodecTest extends AbstractTest {
 	}
 
 	@Test
+	public void testOffsetDateTimeStringCodec() {
+		writeReadCompare(OffsetDateTime.now(), new OffsetDateTimeStringCodec());
+	}
+
+	@Test
+	public void testOffsetTimeStringCodec() {
+		writeReadCompare(OffsetTime.now(), new OffsetTimeStringCodec());
+	}
+
+	@Test
 	public void testPeriodDocumentCodec() {
 		writeReadCompare(Period.of(1, 1, 1), new PeriodDocumentCodec());
 		writeReadCompare(Period.of(2, 2, 2), new PeriodDocumentCodec("y", "m", "d"));
@@ -110,6 +123,11 @@ public class CodecTest extends AbstractTest {
 	@Test
 	public void testYearInt32Codec() {
 		writeReadCompare(Year.now(), new YearInt32Codec());
+	}
+
+	@Test
+	public void testZonedDateTimeStringCodec() {
+		writeReadCompare(ZonedDateTime.now(), new ZonedDateTimeStringCodec());
 	}
 
 }
