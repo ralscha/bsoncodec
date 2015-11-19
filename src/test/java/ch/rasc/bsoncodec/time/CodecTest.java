@@ -21,6 +21,9 @@ import java.nio.ByteBuffer;
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Month;
 import java.time.MonthDay;
 import java.time.Period;
@@ -59,6 +62,31 @@ public class CodecTest {
 	@Test
 	public void testInstantInt64Codec() {
 		writeReadCompare(Instant.now(), new InstantInt64Codec());
+	}
+
+	@Test
+	public void testLocalDateDateCodec() {
+		writeReadCompare(LocalDate.now(), new LocalDateDateCodec());
+	}
+
+	@Test
+	public void testLocalDateStringCodec() {
+		writeReadCompare(LocalDate.now(), new LocalDateStringCodec());
+	}	
+	
+	@Test
+	public void testLocalDateTimeDateCodec() {
+		writeReadCompare(LocalDateTime.now(), new LocalDateTimeDateCodec());
+	}
+
+	@Test
+	public void testLocalDateTimeStringCodec() {
+		writeReadCompare(LocalDateTime.now(), new LocalDateTimeStringCodec());
+	}	
+	
+	@Test
+	public void testLocalTimeStringCodec() {
+		writeReadCompare(LocalTime.now(), new LocalTimeStringCodec());
 	}
 
 	@Test

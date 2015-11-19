@@ -60,8 +60,8 @@ public class PeriodDocumentCodec implements Codec<Period> {
 	@Override
 	public Period decode(BsonReader reader, DecoderContext decoderContext) {
 		reader.readStartDocument();
-		Period period = Period.of(reader.readInt32(yearsKey), reader.readInt32(monthsKey),
-				reader.readInt32(daysKey));
+		Period period = Period.of(reader.readInt32(this.yearsKey),
+				reader.readInt32(this.monthsKey), reader.readInt32(this.daysKey));
 		reader.readEndDocument();
 		return period;
 	}
