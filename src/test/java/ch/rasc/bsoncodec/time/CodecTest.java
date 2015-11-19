@@ -23,6 +23,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.Month;
 import java.time.MonthDay;
+import java.time.Period;
 import java.time.Year;
 
 import org.bson.BsonBinaryReader;
@@ -44,11 +45,16 @@ public class CodecTest {
 	public void testDayOfWeekStringCodec() {
 		writeReadCompare(DayOfWeek.MONDAY, new DayOfWeekStringCodec());
 	}
-	
+
+	@Test
+	public void testDurationInt64Codec() {
+		writeReadCompare(Duration.ofMinutes(44), new DurationInt64Codec());
+	}
+
 	@Test
 	public void testDurationStringCodec() {
 		writeReadCompare(Duration.ofMinutes(44), new DurationStringCodec());
-	}	
+	}
 
 	@Test
 	public void testInstantInt64Codec() {
@@ -77,6 +83,17 @@ public class CodecTest {
 	@Test
 	public void testMonthStringCodec() {
 		writeReadCompare(Month.NOVEMBER, new MonthStringCodec());
+	}
+
+	@Test
+	public void testPeriodDocumentCodec() {
+		writeReadCompare(Period.of(1, 1, 1), new PeriodDocumentCodec());
+		writeReadCompare(Period.of(2, 2, 2), new PeriodDocumentCodec("y", "m", "d"));
+	}
+
+	@Test
+	public void testPeriodStringCodec() {
+		writeReadCompare(Period.of(0, 3, 10), new PeriodStringCodec());
 	}
 
 	@Test
