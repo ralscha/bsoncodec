@@ -15,9 +15,6 @@
  */
 package ch.rasc.bsoncodec.time;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.nio.ByteBuffer;
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.Instant;
@@ -29,15 +26,11 @@ import java.time.MonthDay;
 import java.time.Period;
 import java.time.Year;
 
-import org.bson.BsonBinaryReader;
-import org.bson.BsonBinaryWriter;
-import org.bson.codecs.Codec;
-import org.bson.codecs.DecoderContext;
-import org.bson.codecs.EncoderContext;
-import org.bson.io.BasicOutputBuffer;
 import org.junit.Test;
 
-public class CodecTest {
+import ch.rasc.bsoncodec.AbstractTest;
+
+public class CodecTest extends AbstractTest {
 
 	@Test
 	public void testDayOfWeekInt32Codec() {
@@ -72,8 +65,8 @@ public class CodecTest {
 	@Test
 	public void testLocalDateStringCodec() {
 		writeReadCompare(LocalDate.now(), new LocalDateStringCodec());
-	}	
-	
+	}
+
 	@Test
 	public void testLocalDateTimeDateCodec() {
 		writeReadCompare(LocalDateTime.now(), new LocalDateTimeDateCodec());
@@ -82,8 +75,8 @@ public class CodecTest {
 	@Test
 	public void testLocalDateTimeStringCodec() {
 		writeReadCompare(LocalDateTime.now(), new LocalDateTimeStringCodec());
-	}	
-	
+	}
+
 	@Test
 	public void testLocalTimeStringCodec() {
 		writeReadCompare(LocalTime.now(), new LocalTimeStringCodec());
@@ -127,25 +120,6 @@ public class CodecTest {
 	@Test
 	public void testYearInt32Codec() {
 		writeReadCompare(Year.now(), new YearInt32Codec());
-	}
-
-	@SuppressWarnings("resource")
-	private static <T> void writeReadCompare(T now, Codec<T> codec) {
-		BasicOutputBuffer bsonOutput = new BasicOutputBuffer();
-		BsonBinaryWriter writer = new BsonBinaryWriter(bsonOutput);
-		writer.writeStartDocument();
-		writer.writeName("name");
-		codec.encode(writer, now, EncoderContext.builder().build());
-		writer.writeEndDocument();
-		writer.close();
-
-		BsonBinaryReader reader = new BsonBinaryReader(
-				ByteBuffer.wrap(bsonOutput.toByteArray()));
-		reader.readStartDocument();
-		assertThat(reader.readName()).isEqualTo("name");
-		T readNow = codec.decode(reader, DecoderContext.builder().build());
-
-		assertThat(now).isEqualTo(readNow);
 	}
 
 }

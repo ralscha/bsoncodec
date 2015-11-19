@@ -36,7 +36,8 @@ public class LocalDateDateCodec implements Codec<LocalDate> {
 	@Override
 	public void encode(BsonWriter writer, LocalDate value,
 			EncoderContext encoderContext) {
-		writer.writeDateTime(value.atStartOfDay().atZone(ZoneOffset.UTC).toInstant().toEpochMilli());
+		writer.writeDateTime(
+				value.atStartOfDay().atZone(ZoneOffset.UTC).toInstant().toEpochMilli());
 	}
 
 	@Override
