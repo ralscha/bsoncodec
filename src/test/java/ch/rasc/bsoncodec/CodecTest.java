@@ -13,31 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ch.rasc.bsoncodec.sql;
+package ch.rasc.bsoncodec;
 
-import java.sql.Date;
+import java.math.BigDecimal;
+import java.util.Arrays;
 
-import org.bson.BsonReader;
-import org.bson.BsonWriter;
-import org.bson.codecs.Codec;
-import org.bson.codecs.DecoderContext;
-import org.bson.codecs.EncoderContext;
+import org.junit.Test;
 
-public class DateDateCodec implements Codec<Date> {
+public class CodecTest extends AbstractTest {
 
-	@Override
-	public Class<Date> getEncoderClass() {
-		return Date.class;
-	}
+	@Test
+	public void testSerializeCodec() {
+		writeReadCompare(new BigDecimal("1108.291223"), new SerializeCodec());
+		writeReadCompare(new BigDecimal("1108.291223"), new SerializeCodec(true));
 
-	@Override
-	public void encode(BsonWriter writer, Date value, EncoderContext encoderContext) {
-		writer.writeDateTime(value.getTime());
-	}
-
-	@Override
-	public Date decode(BsonReader reader, DecoderContext decoderContext) {
-		return new Date(reader.readDateTime());
+		int[] array = new int[1000];
+		Arrays.fill(array, 1);
+		writeReadCompare(array, new SerializeCodec());
+		writeReadCompare(array, new SerializeCodec(true));
 	}
 
 }

@@ -29,12 +29,12 @@ import org.bson.io.BasicOutputBuffer;
 public class AbstractTest {
 
 	@SuppressWarnings("resource")
-	protected <T> void writeReadCompare(T now, Codec<T> codec) {
+	protected <T> void writeReadCompare(T source, Codec<T> codec) {
 		BasicOutputBuffer bsonOutput = new BasicOutputBuffer();
 		BsonBinaryWriter writer = new BsonBinaryWriter(bsonOutput);
 		writer.writeStartDocument();
 		writer.writeName("name");
-		codec.encode(writer, now, EncoderContext.builder().build());
+		codec.encode(writer, source, EncoderContext.builder().build());
 		writer.writeEndDocument();
 		writer.close();
 
@@ -44,7 +44,7 @@ public class AbstractTest {
 		assertThat(reader.readName()).isEqualTo("name");
 		T readNow = codec.decode(reader, DecoderContext.builder().build());
 
-		assertThat(now).isEqualTo(readNow);
+		assertThat(readNow).isEqualTo(source);
 	}
 
 }
