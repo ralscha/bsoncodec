@@ -37,6 +37,17 @@ ch.rasc.bsoncodec.time.ZonedDateTimeStringCodec | java.time.ZonedDateTime | Stri
 ch.rasc.bsoncodec.util.LocaleDocumentCodec | java.util.Locale | Document ```{"language": ..., "country": ..., "variant": ...}```    
 ch.rasc.bsoncodec.util.LocaleStringCodec | java.util.Locale | String
 
+## Maven
+
+The library is available from the Maven Central Repository    
+```
+    <dependency>
+        <groupId>ch.rasc</groupId>
+        <artifactId>bsoncodec</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+```
+
 
 ## Changelog
 
