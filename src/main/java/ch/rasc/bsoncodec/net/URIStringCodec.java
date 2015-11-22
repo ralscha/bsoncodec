@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ch.rasc.bsoncodec.lang;
+package ch.rasc.bsoncodec.net;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.bson.BsonInvalidOperationException;
 import org.bson.BsonReader;
@@ -22,28 +25,28 @@ import org.bson.codecs.Codec;
 import org.bson.codecs.DecoderContext;
 import org.bson.codecs.EncoderContext;
 
-@SuppressWarnings("rawtypes")
-public class ClassStringCodec implements Codec<Class> {
+public class URIStringCodec implements Codec<URI> {
 
 	@Override
-	public Class<Class> getEncoderClass() {
-		return Class.class;
+	public Class<URI> getEncoderClass() {
+		return URI.class;
 	}
 
 	@Override
-	public void encode(BsonWriter writer, Class value, EncoderContext encoderContext) {
-		writer.writeString(value.getName());
+	public void encode(BsonWriter writer, URI value, EncoderContext encoderContext) {
+		writer.writeString(value.toString());
 	}
 
 	@Override
-	public Class decode(BsonReader reader, DecoderContext decoderContext) {
-		String className = reader.readString();
+	public URI decode(BsonReader reader, DecoderContext decoderContext) {
+		String uriString = reader.readString();
 		try {
-			return Class.forName(className);
+			return new URI(uriString);
 		}
-		catch (ClassNotFoundException e) {
+		catch (URISyntaxException e) {
 			throw new BsonInvalidOperationException(
-					String.format("Cannot create class from string '%s'", className));
+					String.format("Cannot create URI from string '%s'", uriString));
+
 		}
 	}
 

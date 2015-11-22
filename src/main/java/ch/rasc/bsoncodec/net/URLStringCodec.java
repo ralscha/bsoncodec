@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ch.rasc.bsoncodec.lang;
+package ch.rasc.bsoncodec.net;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.bson.BsonInvalidOperationException;
 import org.bson.BsonReader;
@@ -22,28 +25,28 @@ import org.bson.codecs.Codec;
 import org.bson.codecs.DecoderContext;
 import org.bson.codecs.EncoderContext;
 
-@SuppressWarnings("rawtypes")
-public class ClassStringCodec implements Codec<Class> {
+public class URLStringCodec implements Codec<URL> {
 
 	@Override
-	public Class<Class> getEncoderClass() {
-		return Class.class;
+	public Class<URL> getEncoderClass() {
+		return URL.class;
 	}
 
 	@Override
-	public void encode(BsonWriter writer, Class value, EncoderContext encoderContext) {
-		writer.writeString(value.getName());
+	public void encode(BsonWriter writer, URL value, EncoderContext encoderContext) {
+		writer.writeString(value.toString());
 	}
 
 	@Override
-	public Class decode(BsonReader reader, DecoderContext decoderContext) {
-		String className = reader.readString();
+	public URL decode(BsonReader reader, DecoderContext decoderContext) {
+		String urlString = reader.readString();
 		try {
-			return Class.forName(className);
+			return new URL(urlString);
 		}
-		catch (ClassNotFoundException e) {
+		catch (MalformedURLException e) {
 			throw new BsonInvalidOperationException(
-					String.format("Cannot create class from string '%s'", className));
+					String.format("Cannot create URL from string '%s'", urlString));
+
 		}
 	}
 
