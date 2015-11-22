@@ -35,4 +35,11 @@ public class CodecTest extends AbstractTest {
 				new LocaleDocumentCodec("l", "c", "v"));
 	}
 
+	@Test
+	public void testLocaleStringCodec() {
+		writeReadCompare(Locale.ENGLISH, new LocaleStringCodec());
+		writeReadCompare(Locale.ITALY, new LocaleStringCodec());
+		writeReadCompare(new Locale("la", "co", "va"), new LocaleStringCodec());
+	}
+
 }
