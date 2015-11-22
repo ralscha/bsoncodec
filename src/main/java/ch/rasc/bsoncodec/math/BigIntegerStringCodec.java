@@ -16,6 +16,7 @@
 package ch.rasc.bsoncodec.math;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 
 import org.bson.BsonReader;
 import org.bson.BsonWriter;
@@ -25,6 +26,22 @@ import org.bson.codecs.EncoderContext;
 
 public class BigIntegerStringCodec implements Codec<BigInteger> {
 
+	private final static char[] SIGNS = { '-', '+', '+' };
+
+	/**
+	 * If > 0 left align and zero pad the String. zeroPadding specifies the total number
+	 * characters of the resulting String: sign + digits
+	 */
+	private final Integer zeroPadding;
+
+	public BigIntegerStringCodec() {
+		this(null);
+	}
+
+	public BigIntegerStringCodec(Integer zeroPadding) {
+		this.zeroPadding = zeroPadding;
+	}
+
 	@Override
 	public Class<BigInteger> getEncoderClass() {
 		return BigInteger.class;
@@ -33,7 +50,12 @@ public class BigIntegerStringCodec implements Codec<BigInteger> {
 	@Override
 	public void encode(BsonWriter writer, BigInteger value,
 			EncoderContext encoderContext) {
-		writer.writeString(value.toString());
+		if (this.zeroPadding == null) {
+			writer.writeString(value.toString());
+		}
+		else {
+			writer.writeString(formatBigInteger(value));
+		}
 	}
 
 	@Override
@@ -41,4 +63,19 @@ public class BigIntegerStringCodec implements Codec<BigInteger> {
 		return new BigInteger(reader.readString());
 	}
 
+	private String formatBigInteger(BigInteger bd) {
+		char[] result = new char[this.zeroPadding];
+		Arrays.fill(result, '0');
+		result[0] = SIGNS[bd.signum() + 1];
+
+		String s = bd.toString();
+		if (s.startsWith("-")) {
+			s = s.substring(1);
+		}
+
+		char[] source = s.toCharArray();
+		System.arraycopy(source, 0, result, result.length - source.length, source.length);
+
+		return new String(result);
+	}
 }
