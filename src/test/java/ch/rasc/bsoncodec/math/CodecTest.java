@@ -45,4 +45,14 @@ public class CodecTest extends AbstractTest {
 		writeReadCompare(new BigInteger("1133"), new BigIntegerStringCodec(50));
 	}
 
+	@Test
+	public void testBigDecimalDecimal128Codec() {
+		writeReadCompare(new BigDecimal("0"), new BigDecimalDecimal128Codec());
+		writeReadCompare(new BigDecimal("1"), new BigDecimalDecimal128Codec());
+		writeReadCompare(new BigDecimal("-1"), new BigDecimalDecimal128Codec());
+		writeReadCompare(new BigDecimal(String.valueOf(Long.MAX_VALUE)),
+				new BigDecimalDecimal128Codec());
+		writeReadCompare(new BigDecimal(String.valueOf(Long.MIN_VALUE)),
+				new BigDecimalDecimal128Codec());
+	}
 }

@@ -26,4 +26,11 @@ public class CodecTest extends AbstractTest {
 		writeReadCompare(String.class, new ClassStringCodec());
 	}
 
+	@Test
+	public void testStringDecimal128Codec() {
+		writeReadCompare("0", new StringDecimal128Codec());
+		writeReadCompare("1", new StringDecimal128Codec());
+		writeReadCompare("-1", new StringDecimal128Codec());
+		writeReadCompare(String.valueOf(Long.MAX_VALUE), new StringDecimal128Codec());
+	}
 }
