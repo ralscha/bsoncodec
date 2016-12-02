@@ -6,6 +6,8 @@ Codec | Java | BSON
 ------| ---- | ----
 ch.rasc.bsoncodec.SerializeCodec | java.io.Serializable | BinaryData
 ch.rasc.bsoncodec.lang.ClassStringCodec | java.lang.Class | String
+ch.rasc.bsoncodec.lang.StringDecimal128Codec | java.lang.String | Decimal128
+ch.rasc.bsoncodec.math.BigDecimalDecimal128Codec | java.math.BigDecimal | Decimal128  
 ch.rasc.bsoncodec.math.BigDecimalDocumentCodec | java.math.BigDecimal | Document ```{"unscaled": ..., "scale": ...}```   
 ch.rasc.bsoncodec.math.BigDecimalStringCodec | java.math.BigDecimal | String
 ch.rasc.bsoncodec.math.BigIntegerStringCodec | java.math.BigInteger | String
@@ -44,12 +46,18 @@ The library is available from the Maven Central Repository
     <dependency>
         <groupId>ch.rasc</groupId>
         <artifactId>bsoncodec</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </dependency>
 ```
 
 
 ## Changelog
+
+### 1.0.1 - December 2, 2016
+  - Add StringDecimal128Codec and BigDecimalDecimal128Codec.    
+    Both codecs convert from and to the new bson datatype Decimal128    
+    introduced with MongoDB 3.4
+
 
 ### 1.0.0 - November 22, 2015
   - Initial release
