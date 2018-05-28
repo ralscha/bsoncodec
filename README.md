@@ -1,5 +1,8 @@
 [![Build Status](https://api.travis-ci.org/ralscha/bsoncodec.png)](https://travis-ci.org/ralscha/bsoncodec)
 
+Version 3.7 of the MongoDB Java Driver now supports Instant, LocalDate and LocalDateTime. See more information on the [What's New](http://mongodb.github.io/mongo-java-driver/3.7/whats-new/) page.
+
+
 ## Collection of org.bson.codecs.Codec implementations
 
 Codec | Java | BSON
@@ -58,7 +61,6 @@ The library is available from the Maven Central Repository
     Both codecs convert from and to the new bson datatype Decimal128    
     introduced with MongoDB 3.4
 
-
 ### 1.0.0 - November 22, 2015
   - Initial release
 
@@ -66,6 +68,9 @@ The library is available from the Maven Central Repository
 ## License
 Code released under [the Apache license](http://www.apache.org/licenses/).
 
+## Other Codec libraries
+   * JSR-310 codecs provider by Cezary: [bson-codecs-jsr310](https://github.com/cbartosiak/bson-codecs-jsr310)
+   
 ## Links
    * [BSON Specification](http://bsonspec.org/)
    * [MongoDB Java Driver](https://mongodb.github.io/mongo-java-driver/)
