@@ -17,6 +17,7 @@ package ch.rasc.bsoncodec.money;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 
 import javax.money.CurrencyUnit;
 import javax.money.Monetary;
@@ -68,7 +69,7 @@ public class MonetaryAmountDocumentCodec implements Codec<MonetaryAmount> {
 		BigDecimal number = value.getNumber().numberValue(BigDecimal.class);
 
 		if (number.scale() > this.scaleThreshold) {
-			number = number.setScale(this.scaleThreshold, BigDecimal.ROUND_HALF_UP);
+			number = number.setScale(this.scaleThreshold, RoundingMode.HALF_UP);
 		}
 
 		writer.writeString(this.currencyKey, value.getCurrency().getCurrencyCode());

@@ -17,6 +17,7 @@ package ch.rasc.bsoncodec.math;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 
 import org.bson.BsonReader;
 import org.bson.BsonWriter;
@@ -60,7 +61,7 @@ public class BigDecimalDocumentCodec implements Codec<BigDecimal> {
 		BigDecimal val = value;
 
 		if (val.scale() > this.scaleThreshold) {
-			val = value.setScale(this.scaleThreshold, BigDecimal.ROUND_HALF_UP);
+			val = value.setScale(this.scaleThreshold, RoundingMode.HALF_UP);
 		}
 
 		writer.writeInt64(this.unscaledKey, val.unscaledValue().longValue());
