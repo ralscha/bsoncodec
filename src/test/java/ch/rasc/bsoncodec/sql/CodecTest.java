@@ -27,7 +27,7 @@ public class CodecTest extends AbstractTest {
 
 	@Test
 	public void testTimestampDateCodec() {
-		writeReadCompare(Timestamp.from(Instant.now()), new TimestampDateCodec());
+		writeReadCompareTimestamp(Timestamp.from(Instant.now()), new TimestampDateCodec());
 	}
 
 	@Test

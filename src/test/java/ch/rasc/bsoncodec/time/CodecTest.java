@@ -52,7 +52,7 @@ public class CodecTest extends AbstractTest {
 
 	@Test
 	public void testInstantInt64Codec() {
-		writeReadCompare(Instant.now(), new InstantInt64Codec());
+		writeReadCompareInstant(Instant.now(), new InstantInt64Codec());
 	}
 
 	@Test
@@ -67,7 +67,7 @@ public class CodecTest extends AbstractTest {
 
 	@Test
 	public void testLocalDateTimeDateCodec() {
-		writeReadCompare(LocalDateTime.now(), new LocalDateTimeDateCodec());
+		writeReadCompareLocalDateTime(LocalDateTime.now(), new LocalDateTimeDateCodec());
 	}
 
 	@Test

@@ -18,7 +18,12 @@ package ch.rasc.bsoncodec;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.nio.ByteBuffer;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
+import org.assertj.core.data.TemporalUnitWithinOffset;
 import org.bson.BsonBinaryReader;
 import org.bson.BsonBinaryWriter;
 import org.bson.codecs.Codec;
@@ -47,4 +52,62 @@ public class AbstractTest {
 		assertThat(readNow).isEqualTo(source);
 	}
 
+	@SuppressWarnings("resource")
+	protected void writeReadCompareTimestamp(Timestamp source, Codec<Timestamp> codec) {
+		BasicOutputBuffer bsonOutput = new BasicOutputBuffer();
+		BsonBinaryWriter writer = new BsonBinaryWriter(bsonOutput);
+		writer.writeStartDocument();
+		writer.writeName("name");
+		codec.encode(writer, source, EncoderContext.builder().build());
+		writer.writeEndDocument();
+		writer.close();
+
+		BsonBinaryReader reader = new BsonBinaryReader(
+				ByteBuffer.wrap(bsonOutput.toByteArray()));
+		reader.readStartDocument();
+		assertThat(reader.readName()).isEqualTo("name");
+		Timestamp readNow = codec.decode(reader, DecoderContext.builder().build());
+
+		assertThat(readNow).isEqualToIgnoringMillis(source);
+	}
+
+	@SuppressWarnings("resource")
+	protected void writeReadCompareInstant(Instant source, Codec<Instant> codec) {
+		BasicOutputBuffer bsonOutput = new BasicOutputBuffer();
+		BsonBinaryWriter writer = new BsonBinaryWriter(bsonOutput);
+		writer.writeStartDocument();
+		writer.writeName("name");
+		codec.encode(writer, source, EncoderContext.builder().build());
+		writer.writeEndDocument();
+		writer.close();
+
+		BsonBinaryReader reader = new BsonBinaryReader(
+				ByteBuffer.wrap(bsonOutput.toByteArray()));
+		reader.readStartDocument();
+		assertThat(reader.readName()).isEqualTo("name");
+		Instant readNow = codec.decode(reader, DecoderContext.builder().build());
+
+		assertThat(readNow).isCloseTo(source,
+				new TemporalUnitWithinOffset(0, ChronoUnit.MILLIS));
+	}
+
+	@SuppressWarnings("resource")
+	protected void writeReadCompareLocalDateTime(LocalDateTime source, Codec<LocalDateTime> codec) {
+		BasicOutputBuffer bsonOutput = new BasicOutputBuffer();
+		BsonBinaryWriter writer = new BsonBinaryWriter(bsonOutput);
+		writer.writeStartDocument();
+		writer.writeName("name");
+		codec.encode(writer, source, EncoderContext.builder().build());
+		writer.writeEndDocument();
+		writer.close();
+
+		BsonBinaryReader reader = new BsonBinaryReader(
+				ByteBuffer.wrap(bsonOutput.toByteArray()));
+		reader.readStartDocument();
+		assertThat(reader.readName()).isEqualTo("name");
+		LocalDateTime readNow = codec.decode(reader, DecoderContext.builder().build());
+
+		assertThat(readNow).isCloseTo(source,
+				new TemporalUnitWithinOffset(0, ChronoUnit.MILLIS));
+	}
 }
