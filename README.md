@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.org/ralscha/bsoncodec.png)](https://travis-ci.org/ralscha/bsoncodec)
+![Build Status](https://github.com/ralscha/bsoncodec/workflows/test/badge.svg)
 
 Version 3.7 of the MongoDB Java Driver now supports Instant, LocalDate and LocalDateTime. See more information on the [What's New](http://mongodb.github.io/mongo-java-driver/3.7/whats-new/) page.
 
