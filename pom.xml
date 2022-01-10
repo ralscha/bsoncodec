@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>bson</artifactId>
-			<version>4.4.0</version>
+			<version>4.4.1</version>
 		</dependency>
 
 		<dependency>
@@ -71,7 +71,7 @@
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
-			<version>3.21.0</version>
+			<version>3.22.0</version>
 			<scope>test</scope>
 		</dependency>
 
