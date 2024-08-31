@@ -26,6 +26,4 @@ jobs:
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'	  
-        java-version: 8		
-    - name: Deploy to Sonatype
-      run: ./mvnw -B -Drepo.username=${{secrets.SONATYPE_USERNAME}} -Drepo.password=${{secrets.SONATYPE_PASSWORD}} clean deploy -DskipTests=true --settings mySettings.xml
+        java-version: 8
