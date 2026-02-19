@@ -17,7 +17,7 @@ package ch.rasc.bsoncodec.util;
 
 import java.util.Locale;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ch.rasc.bsoncodec.AbstractTest;
 

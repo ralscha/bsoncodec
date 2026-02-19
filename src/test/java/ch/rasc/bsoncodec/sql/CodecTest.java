@@ -19,7 +19,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.Instant;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ch.rasc.bsoncodec.AbstractTest;
 

@@ -29,7 +29,7 @@ import java.time.Period;
 import java.time.Year;
 import java.time.ZonedDateTime;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ch.rasc.bsoncodec.AbstractTest;
 

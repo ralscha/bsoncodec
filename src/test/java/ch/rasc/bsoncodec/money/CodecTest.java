@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 import javax.money.Monetary;
 
 import org.javamoney.moneta.Money;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ch.rasc.bsoncodec.AbstractTest;
 

@@ -15,7 +15,7 @@
  */
 package ch.rasc.bsoncodec.lang;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ch.rasc.bsoncodec.AbstractTest;
 
